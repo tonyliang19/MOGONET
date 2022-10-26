@@ -5,6 +5,7 @@ import torch.nn.functional as F
 
 cuda = True if torch.cuda.is_available() else False
 
+
 def cal_sample_weight(labels, num_class, use_sample_weight=True):
     if not use_sample_weight:
         return np.ones(len(labels)) / len(labels)
