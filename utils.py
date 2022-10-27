@@ -28,10 +28,11 @@ def one_hot_tensor(y, num_dim):
 
 def cosine_distance_torch(x1, x2=None, eps=1e-8):
     x2 = x1 if x2 is None else x2
+    # calculates norm for x1 in frobenius form of dimension 1
     w1 = x1.norm(p=2, dim=1, keepdim=True)
+    # calculates norm for x2 in frobenius form of dimension 1
     w2 = w1 if x2 is x1 else x2.norm(p=2, dim=1, keepdim=True)
     return 1 - torch.mm(x1, x2.t()) / (w1 * w2.t()).clamp(min=eps)
-
 
 def to_sparse(x):
     x_typename = torch.typename(x).split('.')[-1]
