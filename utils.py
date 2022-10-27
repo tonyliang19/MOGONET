@@ -27,6 +27,18 @@ def one_hot_tensor(y, num_dim):
 
 
 def cosine_distance_torch(x1, x2=None, eps=1e-8):
+    """
+    Calculates the cosine distance tensor x1 vs tensor x2
+    
+    Parameters
+    ----------
+        x1: torch.Tensor
+          The data tensor
+        x2: torch.Tensor
+          Default is the same data tensor of x1, otherwise extra data tensor input
+        eps: float, optional
+          The epsilon (error) of each entry 
+    """
     x2 = x1 if x2 is None else x2
     # calculates norm for x1 in frobenius form of dimension 1
     w1 = x1.norm(p=2, dim=1, keepdim=True)
@@ -53,6 +65,22 @@ def cal_adj_mat_parameter(edge_per_node, data, metric="cosine"):
 
 
 def graph_from_dist_tensor(dist, parameter, self_dist=True):
+    
+    """
+    Returns a graph with diagonals 0, with all other entries
+    equals 1 if distance <= parameters, 0s otherwise
+    
+    Parameters
+    ----------
+    dist: torch.Tensor
+        The cosine distance matrix of the data
+    
+    parameter: int
+        Number of adjacent parameters
+    
+    self_dict= bool, optional
+        EDIT here
+    """
     if self_dist:
         assert dist.shape[0]==dist.shape[1], "Input is not pairwise dist matrix"
     g = (dist <= parameter).float()

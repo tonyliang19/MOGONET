@@ -17,15 +17,24 @@ def prepare_trte_data(data_folder, view_list):
     Gets all the *tr.csv and *te.csv in the data_folder, and transforms these to list of tensors, then
     storing it on several returned objects
 
-    Args: 
-        data_folder: path to read the data
-        view_list: list of files to be viewed [1,2,3] here
-    Returns:
-        data_train_list: list of tensors of the train data
-        data_all_list: list of tensors of combined train and test data
-        idx_dict: dict that corresponds to the label (id) of both train,
-                  and test data
-        labels:  numpy array that stores the actual class of each observation
+    Parameters
+    ----------
+        data_folder: string
+            path to read the data
+        view_list: list
+            list of integers to be viewed, [1,2,3] here
+
+    Returns
+    ---------
+        data_train_list: list 
+            list of tensors of the train data
+        data_all_list: list 
+            list of tensors of combined train and test data
+        idx_dict: dict 
+            dict that corresponds to the label (id) of both train,
+            and test data
+        labels: np.ndarray
+            numpy array that stores the actual class of each observation
     """
 
     num_view = len(view_list)
