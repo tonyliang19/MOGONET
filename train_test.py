@@ -78,7 +78,36 @@ def prepare_trte_data(data_folder, view_list):
     return data_train_list, data_all_list, idx_dict, labels
 
 
+# Helper function to generate adjacent matrix of the training
+# and testing data
 def gen_trte_adj_mat(data_tr_list, data_trte_list, trte_idx, adj_parameter):
+    """
+    This function calculates the adjacent matrix as tensor for the training data
+    and the testing data correspondently to some adj_parameter
+
+    The default metric is 'cosine', as its the only implemented algorithm.
+
+    Parameters
+    ----------
+        data_tr_list: 
+            list of tensor (training) generated from prepare_trte_data
+        
+        data_trte_list: list 
+            list of tensor (train + test) generated from 
+            prepare_trte_data
+        
+        trte_idx: dict
+            index dictionary of train+test data
+        adj_parameter: int 
+            FILL_UP HERE
+    
+    Returns
+    -------
+        adj_train_list: list 
+            list of adjacent tensors to training data
+        adj_test_list: list 
+            list of adjacent tensors to the train+test data? 
+    """
     adj_metric = "cosine" # cosine distance
     adj_train_list = []
     adj_test_list = []
