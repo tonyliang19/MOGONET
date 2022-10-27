@@ -91,20 +91,8 @@ def graph_from_dist_tensor(dist, parameter, self_dist=True):
     return g
 
 
-# Helper function that generates the adjacent matrix of data
-# and store it as tensor, using cosine metric
 def gen_adj_mat_tensor(data, parameter, metric="cosine"):
-    """
-    FILL IN
-    
-    Parameters:
-    ----------
-        data: FILL
-        parameter: FILL
-        metric: "cosine", optional
-    """
     assert metric == "cosine", "Only cosine distance implemented"
-    # Calculates
     dist = cosine_distance_torch(data, data)
     g = graph_from_dist_tensor(dist, parameter, self_dist=True)
     if metric == "cosine":
@@ -121,6 +109,7 @@ def gen_adj_mat_tensor(data, parameter, metric="cosine"):
     adj = to_sparse(adj)
     
     return adj
+
 
 def gen_test_adj_mat_tensor(data, trte_idx, parameter, metric="cosine"):
     assert metric == "cosine", "Only cosine distance implemented"
