@@ -1,5 +1,6 @@
 """ Componets of the model
 """
+
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
