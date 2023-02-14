@@ -2,7 +2,7 @@
 """
 import os
 import copy
-from feat_importance import cal_feat_imp, summarize_imp_feat
+from mogonet.feat_importance import cal_feat_imp, summarize_imp_feat
 
 if __name__ == "__main__":
     data_folder = 'BRCA'

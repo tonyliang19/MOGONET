@@ -5,8 +5,8 @@ import numpy as np
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 import torch
 import torch.nn.functional as F
-from models import init_model_dict, init_optim
-from utils import one_hot_tensor, cal_sample_weight, gen_adj_mat_tensor, gen_test_adj_mat_tensor, cal_adj_mat_parameter
+from mogonet.models import init_model_dict, init_optim
+from mogonet.utils import one_hot_tensor, cal_sample_weight, gen_adj_mat_tensor, gen_test_adj_mat_tensor, cal_adj_mat_parameter
 
 # Helper function to prepare the data
 cuda = True if torch.cuda.is_available() else False
@@ -142,10 +142,14 @@ def train_test(data_folder, view_list, num_class,
     test_inverval = 50
     num_view = len(view_list)
     dim_hvcdn = pow(num_class,num_view)
-    if data_folder == 'ROSMAP':
+    
+    # originally assumed no prefix
+    #if data_folder == 'ROSMAP':
+    if data_folder.__contains__('ROSMAP'):
         adj_parameter = 2
         dim_he_list = [200,200,100]
-    if data_folder == 'BRCA':
+    #if data_folder == 'BRCA':
+    if data_folder.__contains__('BRCA'):
         adj_parameter = 10
         dim_he_list = [400,400,200]
     data_tr_list, data_trte_list, trte_idx, labels_trte = prepare_trte_data(data_folder, view_list)
@@ -185,4 +189,3 @@ def train_test(data_folder, view_list, num_class,
                 print("Test ACC: {:.3f}".format(accuracy_score(labels_trte[trte_idx["te"]], te_prob.argmax(1))))
                 print("Test F1 weighted: {:.3f}".format(f1_score(labels_trte[trte_idx["te"]], te_prob.argmax(1), average='weighted')))
                 print("Test F1 macro: {:.3f}".format(f1_score(labels_trte[trte_idx["te"]], te_prob.argmax(1), average='macro')))
-            print()

@@ -1,6 +1,6 @@
 """ Example for MOGONET classification
 """
-from train_test import train_test
+from mogonet.train_test import train_test
 
 if __name__ == "__main__":    
     data_folder = 'ROSMAP'
